@@ -35,21 +35,21 @@ class Underscores_Generator_Plugin {
 
 				<section class="generator-form-inputs">
 					<section class="generator-form-primary">
-						<label for="underscoresme-name">Theme Name</label>
+						<label for="underscoresme-name" class="assistive-text">Theme Name</label>
 						<input type="text" id="underscoresme-name" name="underscoresme_name" placeholder="Theme Name" />
 					</section><!-- .generator-form-primary -->
 
 					<section class="generator-form-secondary">
-						<label for="underscoresme-slug">Theme Slug</label>
+						<label for="underscoresme-slug" class="assistive-text">Theme Slug</label>
 						<input type="text" id="underscoresme-slug" name="underscoresme_slug" placeholder="Theme Slug" />
 
-						<label for="underscoresme-author">Author</label>
+						<label for="underscoresme-author" class="assistive-text">Author</label>
 						<input type="text" id="underscoresme-author" name="underscoresme_author" placeholder="Author" />
 
-						<label for="underscoresme-author-uri">Author URI</label>
+						<label for="underscoresme-author-uri" class="assistive-text">Author URI</label>
 						<input type="text" id="underscoresme-author-uri" name="underscoresme_author_uri" placeholder="Author URI" />
 
-						<label for="underscoresme-description">Description</label>
+						<label for="underscoresme-description" class="assistive-text">Description</label>
 						<input type="text" id="underscoresme-description" name="underscoresme_description" placeholder="Description" />
 
 						<input type="checkbox" id="underscoresme-sass" name="underscoresme_sass" value="1">

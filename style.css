@@ -702,11 +702,8 @@ a:active {
 	text-align: center;
 }
 
-.generator-form-inputs label {
-	display: none;
-}
-
-.generator-form-inputs [for="underscoresme-sass"] {
+.generator-form-inputs [for="underscoresme-sass"],
+.generator-form-inputs [for="underscoresme-genericons"] {
 	display: inline;
 }
 
