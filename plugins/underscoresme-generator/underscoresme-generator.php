@@ -54,6 +54,9 @@ class Underscores_Generator_Plugin {
 
 						<input type="checkbox" id="underscoresme-sass" name="underscoresme_sass" value="1">
 						<label for="underscoresme-sass">_sassify!</label>
+
+						<input type="checkbox" id="underscoresme-genericons" name="underscoresme_genericons" value="1">
+						<label for="underscoresme-genericons">_genericonify!</label>
 					</section><!-- .generator-form-secondary -->
 				</section><!-- .generator-form-inputs -->
 
@@ -84,12 +87,14 @@ class Underscores_Generator_Plugin {
 			'author_uri'  => 'http://underscores.me/',
 			'description' => 'Description',
 			'sass'        => false,
+			'genericons'  => false,
 			'wpcom'       => false,
 		);
 
 		$this->theme['name']  = trim( $_REQUEST['underscoresme_name'] );
 		$this->theme['slug']  = sanitize_title_with_dashes( $this->theme['name'] );
 		$this->theme['sass']  = (bool) isset( $_REQUEST['underscoresme_sass'] );
+		$this->theme['genericons']  = (bool) isset( $_REQUEST['underscoresme_genericons'] );
 		$this->theme['wpcom'] = (bool) isset( $_REQUEST['can_i_haz_wpcom'] );
 
 		if ( ! empty( $_REQUEST['underscoresme_slug'] ) ) {
@@ -124,6 +129,10 @@ class Underscores_Generator_Plugin {
 
 		if ( ! $this->theme['sass'] ) {
 			$exclude_directories[] = 'sass';
+		}
+
+		if ( ! $this->theme['genericons'] ) {
+			$exclude_directories[] = 'genericons';
 		}
 
 		if ( ! $this->theme['wpcom'] )
@@ -234,6 +243,9 @@ class Underscores_Generator_Plugin {
 		$features   = array();
 		if ( $this->theme['sass'] ) {
 			$features[] = 'sass';
+		}
+		if ( $this->theme['genericons'] ) {
+			$features[] = 'genericons';
 		}
 		if ( $this->theme['wpcom'] ) {
 			$features[] = 'wpcom';
