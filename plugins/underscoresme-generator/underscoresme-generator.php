@@ -134,10 +134,10 @@ class Underscores_Generator_Plugin {
 		if ( ! $this->theme['wpcom'] )
 			$exclude_files[] = 'wpcom.php';
 
-		/* Add logic to pull genericons directory from GitHub repo here.  */
-		/*if ( ! $this->theme['genericons'] ) {
+		/* Revise logic to pull genericons directory from GitHub repo here.  */
+		if ( ! $this->theme['genericons'] ) {
 			$exclude_directories[] = 'genericons';
-		}*/
+		}
 
 		$iterator = new RecursiveDirectoryIterator( $prototype_dir );
 		foreach ( new RecursiveIteratorIterator( $iterator ) as $filename ) {
@@ -210,6 +210,11 @@ class Underscores_Generator_Plugin {
 				$contents = preg_replace( '#/\*\*\n\s+\*\s+' . preg_quote( $find ) . '#i', '@wpcom_start', $contents );
 				$contents = preg_replace( '#/inc/wpcom\.php\';#i', '@wpcom_end', $contents );
 				$contents = preg_replace( '#@wpcom_start(.+)@wpcom_end\n?(\n\s)?#ims', '', $contents );
+			}
+
+			if ( ! $this->theme['genericons'] ) {
+				$find = 'wp_enqueue_style( \'_s-genericons\', get_stylesheet_uri() . \'/genericons/genericons.css\', array(), \'20150231\', \'screen\' );';
+				$contents = preg_replace( preg_quote( $find ), '', $contents);
 			}
 		}
 
