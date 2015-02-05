@@ -120,7 +120,17 @@ class Underscores_Generator_Plugin {
 
 		$zip = new ZipArchive;
 		$zip_filename = sprintf( '/tmp/underscoresme-%s.zip', md5( print_r( $this->theme, true ) ) );
-		$res = $zip->open( $zip_filename, ZipArchive::CREATE && ZipArchive::OVERWRITE );
+		$res = $zip->open( $zip_filename );
+		$zip->extractTo('/tmp/_s/');
+
+		$genericonzip = new ZipArchive;
+		$genericonzip_filename = sprintf( '/tmp/genericons-%s.zip', md5( print_r( $this->theme, true ) ) );
+		$genericonzip_res = $genericonzip->open( $genericonzip_filename );
+		$genericonzip->extractTo('/tmp/_s/');
+
+		$zip = new ZipArchive;
+		$zip_dir = sprintf( '/tmp/_s/', md5( print_r( $this->theme, true ) ) );
+		$res = $zip->open( $zip_dir, ZipArchive::CREATE && ZipArchive::OVERWRITE );
 
 		$prototype_dir = dirname( __FILE__ ) . '/prototype/';
 
