@@ -131,12 +131,13 @@ class Underscores_Generator_Plugin {
 			$exclude_directories[] = 'sass';
 		}
 
-		if ( ! $this->theme['genericons'] ) {
-			$exclude_directories[] = 'genericons';
-		}
-
 		if ( ! $this->theme['wpcom'] )
 			$exclude_files[] = 'wpcom.php';
+
+		/* Add logic to pull genericons directory from GitHub repo here.  */
+		/*if ( ! $this->theme['genericons'] ) {
+			$exclude_directories[] = 'genericons';
+		}*/
 
 		$iterator = new RecursiveDirectoryIterator( $prototype_dir );
 		foreach ( new RecursiveIteratorIterator( $iterator ) as $filename ) {
