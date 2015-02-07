@@ -52,11 +52,15 @@ class Underscores_Generator_Plugin {
 						<label for="underscoresme-description" class="assistive-text">Description</label>
 						<input type="text" id="underscoresme-description" name="underscoresme_description" placeholder="Description" />
 
-						<input type="checkbox" id="underscoresme-sass" name="underscoresme_sass" value="1">
-						<label for="underscoresme-sass">_sassify!</label>
+						<p class="generator-advanced-options">
+							<input type="checkbox" id="underscoresme-sass" name="underscoresme_sass" value="1">
+							<label for="underscoresme-sass">_sassify!</label>
+						</p>
 
-						<input type="checkbox" id="underscoresme-genericons" name="underscoresme_genericons" value="1">
-						<label for="underscoresme-genericons">_genericonify!</label>
+						<p class="generator-advanced-options">
+							<input type="checkbox" id="underscoresme-genericons" name="underscoresme_genericons" value="1">
+							<label for="underscoresme-genericons">genericons</label>
+						</p>
 					</section><!-- .generator-form-secondary -->
 				</section><!-- .generator-form-inputs -->
 
