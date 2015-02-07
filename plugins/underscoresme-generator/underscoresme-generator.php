@@ -217,8 +217,8 @@ class Underscores_Generator_Plugin {
 			}
 
 			if ( ! $this->theme['genericons'] ) {
-				$find = 'wp_enqueue_style( \'_s-genericons\', get_stylesheet_uri() . \'/genericons/genericons.css\', array(), \'20150231\', \'screen\' );';
-				$contents = preg_replace( preg_quote( $find ), '', $contents);
+				$find = preg_quote( '#wp_enqueue_style( \'_s-genericons\', get_stylesheet_uri() . \'/genericons/genericons.css\', array(), \'/{([0-9]+)}/\', \'screen\' );#i' );
+				$contents = preg_replace( $find, '', $contents );
 			}
 		}
 
