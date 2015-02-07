@@ -118,21 +118,25 @@ class Underscores_Generator_Plugin {
 			$this->theme['author_uri'] = trim( $_REQUEST['underscoresme_author_uri'] );
 		}
 
-		$zip = new ZipArchive;
-		$zip_filename = sprintf( '/tmp/underscoresme-%s.zip', md5( print_r( $this->theme, true ) ) );
-		$res = $zip->open( $zip_filename );
-		$zip->extractTo('/tmp/_s/');
+		$prototype_dir = dirname( __FILE__ ) . '/prototype/';
 
+		/* Unzip our original _s zip and move it. */
+		$orig_zip = new ZipArchive;
+		$orig_zip_filename = sprintf( '/tmp/underscoresme-%s.zip', md5( print_r( $this->theme, true ) ) );
+		$zip_dir = sprintf( '/tmp/underscoresme-%s/', md5( print_r( $this->theme, true ) ) );
+		$orig_res = $zip->open( $orig_zip_filename );
+		$zip->extractTo( $zip_dir );
+
+		/* Unzip our original genericons zip and move it inside the _s directory. */
 		$genericonzip = new ZipArchive;
 		$genericonzip_filename = sprintf( '/tmp/genericons-%s.zip', md5( print_r( $this->theme, true ) ) );
 		$genericonzip_res = $genericonzip->open( $genericonzip_filename );
-		$genericonzip->extractTo('/tmp/_s/');
+		$genericonzip->extractTo( $zip_dir . '/genericons/' );
 
+		/* Start to zip everything back up. */
 		$zip = new ZipArchive;
-		$zip_dir = sprintf( '/tmp/_s/', md5( print_r( $this->theme, true ) ) );
-		$res = $zip->open( $zip_dir, ZipArchive::CREATE && ZipArchive::OVERWRITE );
-
-		$prototype_dir = dirname( __FILE__ ) . '/prototype/';
+		$zip_filename = sprintf( $zip_dir . '-%s.zip', md5( print_r( $this->theme, true ) ) );
+		$res = $zip->open( $zip_filename, ZipArchive::CREATE && ZipArchive::OVERWRITE );
 
 		$exclude_files = array( '.travis.yml', 'codesniffer.ruleset.xml', 'CONTRIBUTING.md', '.git', '.svn', '.DS_Store', '.gitignore', '.', '..' );
 		$exclude_directories = array( '.git', '.svn', '.', '..' );
@@ -144,7 +148,6 @@ class Underscores_Generator_Plugin {
 		if ( ! $this->theme['wpcom'] )
 			$exclude_files[] = 'wpcom.php';
 
-		/* Revise logic to pull genericons directory from GitHub repo here.  */
 		if ( ! $this->theme['genericons'] ) {
 			$exclude_directories[] = 'genericons';
 		}
