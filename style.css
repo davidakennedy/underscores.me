@@ -746,6 +746,10 @@ a:active {
 	display: block;
 }
 
+.generator-advanced-options {
+	margin-bottom: 0;
+}
+
 #generator-form a.generator-form-optionstoggle,
 .generator-form-version {
 	font-size: 12px;

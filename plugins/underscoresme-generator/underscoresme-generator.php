@@ -52,11 +52,15 @@ class Underscores_Generator_Plugin {
 						<label for="underscoresme-description" class="assistive-text">Description</label>
 						<input type="text" id="underscoresme-description" name="underscoresme_description" placeholder="Description" />
 
-						<input type="checkbox" id="underscoresme-sass" name="underscoresme_sass" value="1">
-						<label for="underscoresme-sass">_sassify!</label>
+						<p class="generator-advanced-options">
+							<input type="checkbox" id="underscoresme-sass" name="underscoresme_sass" value="1">
+							<label for="underscoresme-sass">_sassify!</label>
+						</p>
 
-						<input type="checkbox" id="underscoresme-genericons" name="underscoresme_genericons" value="1">
-						<label for="underscoresme-genericons">_genericonify!</label>
+						<p class="generator-advanced-options">
+							<input type="checkbox" id="underscoresme-genericons" name="underscoresme_genericons" value="1">
+							<label for="underscoresme-genericons">genericons</label>
+						</p>
 					</section><!-- .generator-form-secondary -->
 				</section><!-- .generator-form-inputs -->
 
@@ -225,9 +229,10 @@ class Underscores_Generator_Plugin {
 				$contents = preg_replace( '#@wpcom_start(.+)@wpcom_end\n?(\n\s)?#ims', '', $contents );
 			}
 
+			// Strip out enqueue function for Genericons stylesheet if option is not checked
 			if ( ! $this->theme['genericons'] ) {
-				$find = 'wp_enqueue_style( \'_s-genericons\', get_stylesheet_uri() . \'/genericons/genericons.css\', array(), \'20150231\', \'screen\' );';
-				$contents = preg_replace( preg_quote( $find ), '', $contents);
+				$find = preg_quote( '#wp_enqueue_style( \'_s-genericons\', get_stylesheet_uri() . \'/genericons/genericons.css\', array(), \'') . '[\d]+' . preg_quote( '\', \'screen\' );#i' );
+				$contents = preg_replace( $find, '', $contents );
 			}
 		}
 
