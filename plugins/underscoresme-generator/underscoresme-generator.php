@@ -218,8 +218,8 @@ class Underscores_Generator_Plugin {
 
 			// Strip out enqueue function for Genericons stylesheet if option is not checked
 			if ( ! $this->theme['genericons'] ) {
-				$find = preg_quote( '#wp_enqueue_style( \'_s-genericons\', get_stylesheet_uri() . \'/genericons/genericons.css\', array(), \'') . '([\d])+' . preg_quote( '\', \'screen\' );#i' );
-				$contents = preg_replace( $find, '8', $contents );
+				$find = preg_quote( '#wp_enqueue_style( \'_s-genericons\', get_stylesheet_uri() . \'/genericons/genericons.css\', array(), \'') . '[\d]+' . preg_quote( '\', \'screen\' );#i' );
+				$contents = preg_replace( $find, '', $contents );
 			}
 		}
 
